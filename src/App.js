@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <h1>Emoji Search</h1>
+      <h1 style={{ color: 'white' }}>Emoji Search</h1>
       <input
         type="text"
         placeholder="Search"
