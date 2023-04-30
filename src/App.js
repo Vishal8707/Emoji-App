@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useEffect, useState } from "react";
+import emojiData from "./emojiData.json";
+import "./App.css";
 function App() {
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const newData = emojiData.filter((emoji) =>
+      emoji.title.toLowerCase().includes(search.toLocaleLowerCase())
+    );
+    setData(newData);
+  }, [search]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Emoji Search</h1>
+      <input
+        type="text"
+        placeholder="Search"
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+      />
+      {data.map((emoji) => (
+        <h2 key={emoji.title}>
+          {emoji.title} {emoji.symbol}
+        </h2>
+      ))}
     </div>
   );
 }
